@@ -11,7 +11,7 @@ class NotesService {
   }
 
   async addNote({
-    title, body, tags, owner,
+    title, body, tags, credentialId: owner,
   }) {
     const id = nanoid(16);
     const createdAt = new Date().toISOString();
@@ -90,7 +90,7 @@ class NotesService {
     const result = await this._pool.query(query);
 
     if (!result.rows.length) {
-      throw new NotFoundError('Resource yang Anda minta tidak ditemukan');
+      throw new NotFoundError('Catatan tidak ditemukan');
     }
 
     const note = result.rows[0];

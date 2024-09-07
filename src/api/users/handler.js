@@ -12,12 +12,14 @@ class UsersHandler {
     const { username, password, fullname } = request.payload;
 
     const userId = await this._service.addUser({ username, password, fullname });
+    const user = await this._service.getUserById(userId);
 
     const response = h.response({
       status: 'success',
       message: 'User berhasil ditambahkan',
       data: {
         userId,
+        userName: user.username,
       },
     });
     response.code(201);
